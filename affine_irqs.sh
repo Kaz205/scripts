@@ -19,17 +19,13 @@ fi
 
 for item in "${items[@]}"
 do
-	# Get last text
-	AFFINITY_NUM=$(echo "$item" | awk '{print $NF}')
-	# Get $item and remove the last text (AFFINITY_NUM) and remove all whitespace (xargs)
-	IRQ_NAME=$(echo "$item" | sed 's/\(.*\)'"$AFFINITY_NUM"'/\1/' | xargs)
+	# Get text before whitespace
+	IRQ_NAME=$(echo "$item" | awk '{print $1}')
 	# Get text until first occurance of colon and remove all whitespace (xargs)
-	IRQ_NUM=$(cat /proc/interrupts | grep '$IRQ_NAME' | cut -d: -f1 | xargs)
+	IRQ_NUM=$(cat /proc/interrupts | grep $IRQ_NAME | cut -d: -f1 | xargs)
+	# Get text after whitespace
+	AFFINITY_NUM=$(echo "$item" | awk '{print $2}')
 	echo $AFFINITY_NUM > /proc/irq/$IRQ_NUM/smp_affinity_list
-	if [ $? -eq 0 ]; then
-		echo "Affined $IRQ_NAME to CPU$AFFINITY_NUM"
-	else
-		echo "Failed to affine $IRQ_NAME to CPU$AFFINITY_NUM"
-	fi
+	echo "Affined $IRQ_NAME to CPU$AFFINITY_NUM"
 done
 
