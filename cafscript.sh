@@ -1,4 +1,4 @@
-TAG="LA.UM.9.14.r1-20800-LAHAINA.QSSI13.0"
+TAG="LA.UM.9.14.r1-21600-LAHAINA.QSSI14.0"
 MERGE=0
 
 if [ $MERGE != 1 ]
@@ -14,9 +14,9 @@ git subtree add --prefix=drivers/staging/fw-api https://git.codelinaro.org/clo/l
 git subtree add --prefix=drivers/staging/qca-wifi-host-cmn https://git.codelinaro.org/clo/la/platform/vendor/qcom-opensource/wlan/qca-wifi-host-cmn $TAG
 git subtree add --prefix=drivers/staging/qcacld-3.0 https://git.codelinaro.org/clo/la/platform/vendor/qcom-opensource/wlan/qcacld-3.0 $TAG
 git subtree add --prefix=arch/arm64/boot/dts/vendor https://github.com/Kaz205/renoir devicetree-rebase
-git subtree add --prefix=arch/arm64/boot/dts/vendor https://github.com/MotorolaMobilityLLC/kernel-devicetree 08a763a4b389de64aa1b9f9d4040355b393ad584
-git subtree add --prefix=arch/arm64/boot/dts/vendor/qcom/camera https://github.com/MotorolaMobilityLLC/kernel-camera-devicetree b17ef9585d6e5d370e0db190746404de04efe8c2
-git subtree add --prefix=arch/arm64/boot/dts/vendor/qcom/display https://github.com/MotorolaMobilityLLC/kernel-display-devicetree 0b961aa60cdb2326244b8098b976b8decc0096ff
+git subtree add --prefix=arch/arm64/boot/dts/vendor https://github.com/MotorolaMobilityLLC/kernel-devicetree f79fd4b12e59ada5840c29ff0b7d477e766273b6
+git subtree add --prefix=arch/arm64/boot/dts/vendor/qcom/camera https://github.com/MotorolaMobilityLLC/kernel-camera-devicetree f1917cf225900921b9ce93e4f8f6edd0bf66d721
+git subtree add --prefix=arch/arm64/boot/dts/vendor/qcom/display https://github.com/MotorolaMobilityLLC/kernel-display-devicetree e97468a89f4603787fe161195be14174b425b5f9
 else
 git subtree pull --prefix=techpack/audio https://git.codelinaro.org/clo/la/platform/vendor/opensource/audio-kernel $TAG
 git subtree pull --prefix=techpack/camera https://git.codelinaro.org/clo/la/platform/vendor/opensource/camera-kernel $TAG
