@@ -3,7 +3,7 @@
 # Usecase:
 # items[n]="'irq_name, number' 'CPU(s) affinity list'"
 
-items[0]="23510c000.spi 1"
+items[0]="23510c000.spi 2"
 items[1]="206408000.mbox-recv 3"
 items[2]="206408000.mbox-send 2"
 items[3]="231c08000.mbox-recv 1"
