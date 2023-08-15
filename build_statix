@@ -20,14 +20,11 @@ then
     exit 1
 fi
 
-server_file=$(ssh kazuki@192.168.13.165 "ls -l /home/kazuki/statix/out/target/product/renoir/" | rg "UNOFFICIAL.zip" | tail -1 - | awk '{print $NF}')
+server_file=$(ssh kazuki@192.168.13.165 "cd /home/kazuki/statix/out/target/product/renoir/ && ls -l *.zip" | rg "UNOFFICIAL.zip" | tail -1 - | awk '{print $NF}')
 local_file=$server_file
-number=0
-server_file_without_zip="${server_file%.*}"
+time=$(date +%H-%M)
+server_file_without_zip="${server_file%.zip}"
 
-while [ -f "/home/kazuki/statixos/$local_file" ]; do
-    ((number++))
-    local_file=${server_file_without_zip}_${number}.zip
-    echo $local_file
-done
+local_file=${server_file_without_zip}_${time}.zip
 scp kazuki@192.168.13.165:/home/kazuki/statix/out/target/product/renoir/$server_file ~/statixos/$local_file
+echo $local_file
