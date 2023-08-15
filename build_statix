@@ -1,0 +1,33 @@
+#!/bin/bash
+
+build_mode=$1
+echo $build_mode | grep -q "clean\|dirty"
+if [ $? = 1 ]
+then
+    echo "Please specify whether to clean build or dirty build"
+    exit 1
+fi
+
+if [ $build_mode = "clean" ]
+then
+    ssh kazuki@192.168.13.165 "rm -rf /home/kazuki/statix/out"
+fi
+
+ssh -tt kazuki@192.168.13.165 "cd statix && repo sync --force-sync --no-clone-bundle --current-branch --no-tags -j$(nproc --all) && . build/envsetup.sh && brunch statix_renoir-user"
+if [ $? != 0 ]
+then
+    echo -e "\e[0;31m Build failed, exiting... \e[0m"
+    exit 1
+fi
+
+server_file=$(ssh kazuki@192.168.13.165 "ls -l /home/kazuki/statix/out/target/product/renoir/" | rg "UNOFFICIAL.zip" | tail -1 - | awk '{print $NF}')
+local_file=$server_file
+number=0
+server_file_without_zip="${server_file%.*}"
+
+while [ -f "/home/kazuki/statixos/$local_file" ]; do
+    ((number++))
+    local_file=${server_file_without_zip}_${number}.zip
+    echo $local_file
+done
+scp kazuki@192.168.13.165:/home/kazuki/statix/out/target/product/renoir/$server_file ~/statixos/$local_file
