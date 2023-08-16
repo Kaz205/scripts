@@ -13,14 +13,16 @@ then
     ssh kazuki@192.168.13.165 "rm -rf /home/kazuki/statix/out"
 fi
 
+# Build
 ssh -tt kazuki@192.168.13.165 "cd statix && repo sync --force-sync --no-clone-bundle --current-branch --no-tags -j$(nproc --all) && . build/envsetup.sh && brunch statix_renoir-user"
 if [ $? != 0 ]
 then
-    echo -e "\e[0;31m Build failed, exiting... \e[0m"
+    echo -e "\e[0;31mBuild failed, exiting... \e[0m"
     exit 1
 fi
 
-server_file=$(ssh kazuki@192.168.13.165 "cd /home/kazuki/statix/out/target/product/renoir/ && ls -l *.zip" | rg "UNOFFICIAL.zip" | tail -1 - | awk '{print $NF}')
+# SSH to server then list zips by date then cut and parse zip name
+server_file=$(ssh kazuki@192.168.13.165 "cd /home/kazuki/statix/out/target/product/renoir/ && ls -altr" | rg "UNOFFICIAL.zip" | tail -1 - | awk '{print $NF}')
 local_file=$server_file
 time=$(date +%H-%M)
 server_file_without_zip="${server_file%.zip}"
