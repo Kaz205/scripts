@@ -1,0 +1,9 @@
+[Unit]
+Description=CPB boost ctrl
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/kazuki/scripts/cpb_boost_ctrl.sh
+
+[Install]
+WantedBy=multi-user.target

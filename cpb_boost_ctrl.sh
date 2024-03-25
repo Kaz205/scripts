@@ -1,14 +1,4 @@
-declare -a list=("gcc" "clang" "ffmpeg" "lld")
-
-function get_proc
-{
-	if ps aux | rg $1 | rg -v rg; then
-		# Process exists
-		return
-	else
-		false
-	fi
-}
+declare -a list=("gcc" "clang" "lld" "rustc")
 
 function find_and_set
 {
@@ -17,7 +7,7 @@ function find_and_set
 	for proc in "${list[@]}"
 	do
 		#echo Searching for $proc
-		if get_proc $proc; then
+		if ps aux | rg $proc | rg -v "rg $proc"; then
 			#echo process exists
 			proc_exists=true
 			break
