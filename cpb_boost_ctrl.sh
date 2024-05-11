@@ -1,4 +1,4 @@
-declare -a list=("gcc" "clang" "lld" "rustc")
+declare -a list=("gcc" "clang" "lld" "rustc" "javac")
 
 function find_and_set
 {

@@ -1,0 +1,10 @@
+[Unit]
+Description=EPGStation init
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -c "cd /home/kazuki/EPGStation && npm start"
+User=kazuki
+
+[Install]
+WantedBy=multi-user.target
