@@ -17,6 +17,7 @@ function decrease_rpm ()
 
 while true;
 do
+	# Check Intel GPU voltage
 	volt=$(cat /sys/class/hwmon/hwmon2/in0_input)
 	if [ $volt -ge 600 ]
 	then

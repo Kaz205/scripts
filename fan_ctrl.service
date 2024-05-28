@@ -1,0 +1,9 @@
+[Unit]
+Description=Fan ctrl
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/kazuki/scripts/fan_ctrl.sh
+
+[Install]
+WantedBy=multi-user.target
