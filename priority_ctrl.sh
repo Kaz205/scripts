@@ -1,4 +1,4 @@
-declare -a high=("vivaldi" "/usr/bin/gnome-shell")
+declare -a high=("vivaldi" "/usr/bin/gnome-shell" "chromium" "firefox")
 declare -a low=("ffmpeg")
 
 function find_and_set
