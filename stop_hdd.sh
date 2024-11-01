@@ -26,5 +26,5 @@ do
 
 	diskstats_old=$diskstats
 
-	sleep 60
+	sleep 1
 done
