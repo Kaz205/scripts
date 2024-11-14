@@ -1,1 +1,1 @@
-restic -r /mnt/data/restic-repo --verbose backup ~ --exclude="~/roms*" --exclude-file=/home/kazuki/scripts/exclude-restic.txt
+/home/kazuki/restic --exclude={/dev,/media,/mnt,/proc,/run,/sys,/tmp,/var/tmp} --exclude="/home/kazuki/roms" -r /mnt/data/restic-repo/ backup / --verbose
